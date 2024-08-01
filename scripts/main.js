@@ -7,4 +7,12 @@ const getComputerChoice = () => {
   return stringValues[randomValue];
 };
 
-console.log(getComputerChoice());
+const getHumanChoice = () => {
+  const humanChoice = prompt("Choose rock, paper or scissors").toLowerCase();
+  if (!humanChoice || !stringValues.includes(humanChoice)) {
+    throw new Error("Invalid choice");
+  }
+  return humanChoice;
+};
+
+console.log(getHumanChoice());
