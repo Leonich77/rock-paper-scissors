@@ -18,4 +18,23 @@ const getHumanChoice = () => {
   return humanChoice;
 };
 
-console.log(getHumanChoice());
+const playRound = (humanChoice, computerChoice) => {
+  if (humanChoice === computerChoice) {
+    return "Draw!";
+  }
+  if (
+    (humanChoice === "rock" && computerChoice === "scissors") ||
+    (humanChoice === "paper" && computerChoice === "rock") ||
+    (humanChoice === "scissors" && computerChoice === "paper")
+  ) {
+    humanScore++;
+    return "You win!";
+  }
+  computerScore++;
+  return `You lose ${computerChoice} beats ${humanChoice}!`;
+};
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+console.log(playRound(humanSelection, computerSelection));
