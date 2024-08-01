@@ -2,6 +2,9 @@ const MIN = 0;
 const MAX = 2;
 const stringValues = ["rock", "paper", "scissors"];
 
+let humanScore = 0;
+let computerScore = 0;
+
 const getComputerChoice = () => {
   const randomValue = Math.floor(Math.random() * (MAX - MIN + 1) + MIN);
   return stringValues[randomValue];
