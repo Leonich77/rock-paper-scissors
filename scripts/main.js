@@ -20,7 +20,7 @@ const getHumanChoice = () => {
 
 const playRound = (humanChoice, computerChoice) => {
   if (humanChoice === computerChoice) {
-    return "Draw!";
+    return "Draw, good like in next round!";
   }
   if (
     (humanChoice === "rock" && computerChoice === "scissors") ||
@@ -28,13 +28,26 @@ const playRound = (humanChoice, computerChoice) => {
     (humanChoice === "scissors" && computerChoice === "paper")
   ) {
     humanScore++;
-    return "You win!";
+    return "You win that round!";
   }
   computerScore++;
-  return `You lose ${computerChoice} beats ${humanChoice}!`;
+  return `You lose a round, ${computerChoice} beats ${humanChoice}!`;
 };
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+const playGame = () => {
+  //const humanSelection = '';
+  for (let i = 0; i < 5; i++) {
+    const humanSelection = getHumanChoice();
+    const computerSelection = getComputerChoice();
+    console.log(playRound(humanSelection, computerSelection));
+  }
+  if (humanScore === computerScore) {
+    console.log("Draw, good like in next game!");
+  } else if (humanScore > computerScore) {
+    console.log("You win that game!");
+  } else {
+    console.log("You lose that game!");
+  }
+};
 
-console.log(playRound(humanSelection, computerSelection));
+playGame();
