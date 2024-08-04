@@ -1,6 +1,8 @@
 const MIN = 0;
 const MAX = 2;
 const stringValues = ["rock", "paper", "scissors"];
+const divStyles =
+  "width: 30%; height: 3rem; padding: 0.5rem; display: flex; justify-content: space-evenly; background: lightgrey;";
 
 let humanScore = 0;
 let computerScore = 0;
@@ -35,18 +37,49 @@ const playRound = (humanChoice, computerChoice) => {
 };
 
 const playGame = () => {
-  //const humanSelection = '';
-  for (let i = 0; i < 5; i++) {
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
-    console.log(playRound(humanSelection, computerSelection));
-  }
-  if (humanScore === computerScore) {
-    console.log("Draw, good like in next game!");
-  } else if (humanScore > computerScore) {
-    console.log("You win that game!");
-  } else {
-    console.log("You lose that game!");
+  const buttons = [];
+  const divButtons = document.createElement("div");
+  divButtons.setAttribute("style", divStyles);
+
+  const divResult = document.createElement("div");
+  divResult.setAttribute("style", divStyles);
+
+  const divScore = document.createElement("div");
+  divScore.setAttribute("style", divStyles);
+
+  const humanScoreDiv = document.createElement("div");
+  const humanScoreLabelDiv = document.createElement("div");
+  const computerScoreDiv = document.createElement("div");
+  const computerScoreLabelDiv = document.createElement("div");
+  humanScoreDiv.textContent = humanScore;
+  humanScoreLabelDiv.textContent = "Human";
+  computerScoreDiv.textContent = computerScore;
+  computerScoreLabelDiv.textContent = "Computer";
+  divScore.appendChild(humanScoreLabelDiv);
+  divScore.appendChild(humanScoreDiv);
+  divScore.appendChild(computerScoreLabelDiv);
+  divScore.appendChild(computerScoreDiv);
+
+  document.body.appendChild(divButtons);
+  document.body.appendChild(divResult);
+  document.body.appendChild(divScore);
+
+  for (let i = 0; i < 3; i++) {
+    buttons.push(document.createElement("button"));
+    buttons[i].textContent = stringValues[i];
+    buttons[i].addEventListener("click", () => {
+      const humanSelection = buttons[i].textContent;
+      const computerSelection = getComputerChoice();
+      divResult.textContent = playRound(humanSelection, computerSelection);
+      humanScoreDiv.textContent = humanScore;
+      computerScoreDiv.textContent = computerScore;
+      if (humanScore > 4) {
+        divResult.textContent = "Human win this game!";
+      } else if (computerScore > 4) {
+        divResult.textContent = "Computer win this game!";
+      }
+    });
+    divButtons.appendChild(buttons[i]);
   }
 };
 
